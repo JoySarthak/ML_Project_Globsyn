@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Sales Analytics Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .insight-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .insight-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .insight-card p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .chart-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .chart-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .chart-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .chart-container iframe {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Mobile Sales Analytics Dashboard</h1>
+            <p><strong>DATASET ANALYSIS AND TRENDS DEMONSTRATION</strong></p>
+            <p>Comprehensive analysis of mobile sales data with interactive visualizations</p>
+            <p>Converting seaborn/matplotlib charts to beautiful interactive Plotly visualizations</p>
+        </div>
+
+        <div class="insights-grid">
+            <div class="insight-card">
+                <h3>📊 Dataset Overview</h3>
+                <p>Analysis of 2,806 mobile records after cleaning duplicates and removing NaN values</p>
+            </div>
+            <div class="insight-card">
+                <h3>🏢 Brand Leadership</h3>
+                <p>Samsung leads the market, followed by Realme and Apple in terms of model count</p>
+            </div>
+            <div class="insight-card">
+                <h3>💰 Revenue Champion</h3>
+                <p>Apple generates the highest revenue despite having fewer models than Samsung</p>
+            </div>
+            <div class="insight-card">
+                <h3>⭐ Quality Ratings</h3>
+                <p>Apple leads with highest average ratings (4.6), followed by POCO and Nokia</p>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>1. 🥧 Brand-wise Distribution</h2>
+            <p class="chart-description">Samsung has the lead, followed by Realme and Apple. This colorful pie chart shows market share with explosive visual effects.</p>
+            <div class="chart-container">
+                <iframe src="charts/brand_distribution.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>2. 📈 Number of Models by Brands</h2>
+            <p class="chart-description">Samsung produced the most number of models. The gradient colors and trend line show the distribution pattern beautifully.</p>
+            <div class="chart-container">
+                <iframe src="charts/models_by_brand.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>3. 🎯 Top Performing Brands and Their Best Mobiles</h2>
+            <p class="chart-description">Samsung, Realme, Apple, OPPO and Xiaomi performed better than other brands. This dual donut chart shows both brand performance and their top-selling models.</p>
+            <div class="chart-container">
+                <iframe src="charts/top_brands_mobiles.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>4. 🏆 Top 10 Most Sold Mobile Phones</h2>
+            <p class="chart-description">Apple dominated the market as best selling brand with multiple mobiles occupying the top 10 most sold mobiles list.</p>
+            <div class="chart-container">
+                <iframe src="charts/top_10_mobiles.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>5. 🍎 Apple Model Distribution</h2>
+            <p class="chart-description">iPhone 11 and iPhone 13 Pro Max were crowned as best selling mobiles from Apple. Beautiful gradient colors show the performance hierarchy.</p>
+            <div class="chart-container">
+                <iframe src="charts/apple_models.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>6. 🎨 Top 10 Colors</h2>
+            <p class="chart-description">Black color models from multiple brands were preferred by customers over other colors. Each bar uses the actual color it represents!</p>
+            <div class="chart-container">
+                <iframe src="charts/top_colors.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>7. 💵 Mean Selling Price by Each Brand</h2>
+            <p class="chart-description">Price-wise Apple has the highest mean selling price followed by Google Pixel, IQOO, and others. The heat map colors indicate price levels.</p>
+            <div class="chart-container">
+                <iframe src="charts/mean_selling_price.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>8. ⭐ Mean Ratings of Each Brand</h2>
+            <p class="chart-description">Brands with ratings above the cutoff (4.0) received overall positive response from customers. The coolwarm color scheme highlights top performers.</p>
+            <div class="chart-container">
+                <iframe src="charts/mean_ratings.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>9. 💸 Mean Discount by Each Brand</h2>
+            <p class="chart-description">Brands with high ratings often offered their mobiles at lower prices than original more frequently. Viridis colors show discount patterns.</p>
+            <div class="chart-container">
+                <iframe src="charts/mean_discount.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>10. 🔥 Top 5 Mobiles with Highest Discounts</h2>
+            <p class="chart-description">Motorola Razr leads with ₹75,000 discount, showing the relationship between original price and discount amount.</p>
+            <div class="chart-container">
+                <iframe src="charts/top_discount_mobiles.html"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>11. 💰 Total Revenue Generated by Each Brand</h2>
+            <p class="chart-description">Apple earned the most revenue followed by Samsung, despite Samsung having more models. The plasma color palette shows revenue hierarchy.</p>
+            <div class="chart-container">
+                <iframe src="charts/total_revenue.html"></iframe>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>17</h3>
+                <p>Different Brands</p>
+            </div>
+            <div class="stat-card">
+                <h3>2,806</h3>
+                <p>Clean Records</p>
+            </div>
+            <div class="stat-card">
+                <h3>₹19.6M</h3>
+                <p>Top Revenue (Apple)</p>
+            </div>
+            <div class="stat-card">
+                <h3>4.6</h3>
+                <p>Highest Rating (Apple)</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Mobile Sales Analytics Dashboard</strong> - Interactive Data Visualization</p>
+            <p>Built with Plotly for beautiful, colorful, and interactive charts</p>
+            <p>All charts feature the same vibrant color schemes and insights as the original Jupyter notebook</p>
+        </div>
+    </div>
+</body>
+</html>
